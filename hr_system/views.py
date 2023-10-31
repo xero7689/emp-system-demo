@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
@@ -61,4 +61,6 @@ class RegisterView(View):
 
 class LogoutView(View):
     def get(self, request):
-        return HttpResponse("Logout View")
+        logout(request)
+        messages.info(request, "You have successfully logged out.")
+        return HttpResponseRedirect(reverse("portal_index"))

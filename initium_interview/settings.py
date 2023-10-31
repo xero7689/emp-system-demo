@@ -177,5 +177,14 @@ else:
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+ # Auth Settings
+ AUTH_USER_MODEL = "hr_system.User"
+
+
+ # Login Settings
+ LOGIN_URL = "/portal/login/"
+
+
 # Django Crispy Forms Settings
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

@@ -73,7 +73,7 @@ class Employee(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
-    role = models.ManyToManyField(Role, related_name='employees')
+    role = models.ForeignKey(Role, related_name='employees', on_delete=models.PROTECT)
     date_of_hire = models.DateField(verbose_name="Hiring Date")
     service_status = models.IntegerField(
         choices=ServiceStatus.choices, verbose_name="Service Status")

@@ -8,6 +8,10 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
+
+from .forms import NewUserForm
+
+
 class PortalView(View):
     def get(self, request):
         return render(request, template_name="hr_system/portal.html")
@@ -36,7 +40,20 @@ class LoginView(View):
 
 class RegisterView(View):
     def get(self, request):
-        return HttpResponse("Register View")
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse("portal_index"))
+
+        form = NewUserForm()
+        return render(request, template_name="hr_system/register.html", context={"register_form": form})
+
+    def post(self, request):
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return HttpResponseRedirect(reverse('portal_index'))
+        messages.error(
+            request, "Unsuccessful registration. Invalid information.")
 
 
 class LogoutView(View):

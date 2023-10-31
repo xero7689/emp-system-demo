@@ -1,0 +1,10 @@
+{% extends "hr_system/barebone.html" %}
+{% block content %}
+  <!--Login-->
+  <div class="container py-5">
+    <h1>Welcome, Employee Portal</h1>
+    <p class="text-center">
+      <a href={% url "portal_logout" %}>Logout</a>.
+    </p>
+  </div>
+{% endblock content %}

@@ -1,0 +1,76 @@
+version: "3"
+services:
+  app:
+    container_name: "${APP_NAME}-app"
+    image: ${IMAGE_NAME}:${IMAGE_VERSION:-latest}
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        GIT_USER:
+        GIT_PASSWD:
+        DJANGO_SUPERUSER_USERNAME:
+        DJANGO_SUPERUSER_PASSWORD:
+        DJANGO_SUPERUSER_EMAIL:
+    command: [ "/bin/bash", "-c", "uwsgi --ini uwsgi.ini" ]
+    volumes:
+      - .:/workspace
+      - app_static:${CONTAINER_STORAGE_PATH}
+    environment:
+      IS_DEBUG:
+      IN_CONTAINER:
+      CONTAINER_STORAGE_PATH:
+      DEPLOY_STAGE:
+      DATABASE_URI:
+      DATABASE_DB_NAME:
+      DATABASE_USER:
+      DATABASE_PASSWD:
+      DJANGO_SUPERUSER_USERNAME:
+      DJANGO_SUPERUSER_PASSWORD:
+      DJANGO_SUPERUSER_EMAIL:
+      AWS_S3_REGION:
+      AWS_STORAGE_BUCKET_NAME:
+      AWS_S3_CACHE_CONTROL_MAX_AGE:
+      GIT_USER:
+      GIT_PASSWORD:
+    depends_on:
+      - db
+      - redis
+  server:
+    container_name: "${APP_NAME}-server"
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+      args:
+        DEPLOY_STAGE:
+    volumes:
+      - app_static:${CONTAINER_STORAGE_PATH}
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+  db:
+    container_name: "${APP_NAME}-db"
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${DATABASE_DB_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data 
+  redis:
+    container_name: "${APP_NAME}-cache"
+    restart: always
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - cache_data:/data
+
+volumes:
+  db_data:
+  cache_data:
+  app_static:
+    external: false

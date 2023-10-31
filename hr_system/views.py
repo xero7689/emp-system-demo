@@ -7,11 +7,14 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
+from django.utils.decorators import method_decorator
 
 from .forms import NewUserForm
 
 
+@method_decorator(login_required, name='dispatch')
 class PortalView(View):
     def get(self, request):
         return render(request, template_name="hr_system/portal.html")

@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hr_system",
+    "crispy_forms",
+    "crispy_bootstrap3",
 ]
 
 MIDDLEWARE = [
@@ -174,3 +176,6 @@ else:
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Django Crispy Forms Settings
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

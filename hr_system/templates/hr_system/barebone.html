@@ -24,6 +24,21 @@
     <title>Initium Interview Quest</title>
   </head>
   <body>
+    {% block header %}
+      <div id="portal-header">
+        <p id="portal-header-title">Employee Portal</p>
+        {% if user.is_authenticated %}
+          <div id="portal-header-appbar">
+            <p>
+              Hello <strong>{{ user.get_username }}</strong>!
+            </p>
+            <p class="text-center">
+              <a class="logout-btn" href={% url "portal_logout" %}>Logout</a>
+            </p>
+          </div>
+        {% endif %}
+      </div>
+    {% endblock header %}
     {% block content %}
     {% endblock content %}
   </body>

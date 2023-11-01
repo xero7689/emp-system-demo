@@ -2,15 +2,15 @@
 {% block content %}
   {% load crispy_forms_tags %}
   <!--Login-->
-  <div class="container-sm py-5">
+  <div id="portal-login" class="container py-3 px-4 w-25 shadow rounded">
     <h1>Login</h1>
     <form method="post">
       {% csrf_token %}
       {{ login_form|crispy }}
-      <button class="btn btn-primary" type="submit">Login</button>
+      <button class="btn btn-primary custom-submit-btn" type="submit">Login</button>
     </form>
-    <p class="text-center">
-      Don't have an account? <a href={% url "portal_register" %}>Create One!</a>.
+    <p class="text-center mt-4">
+      Don't have an account? <a href={% url "portal_register" %}>Create One!</a>
     </p>
   </div>
 {% endblock content %}

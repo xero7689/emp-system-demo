@@ -27,3 +27,8 @@
 .logout-btn {
   color: #cbbde2;
 }
+
+.custom-submit-btn {
+  background-color: #9a77dd;
+  border: none;
+}

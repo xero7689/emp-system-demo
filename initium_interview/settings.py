@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "hr_system",
     "crispy_forms",
-    "crispy_bootstrap3",
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -187,4 +187,4 @@ LOGIN_URL = "/portal/login/"
 
 
 # Django Crispy Forms Settings
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

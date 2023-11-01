@@ -4,4 +4,4 @@ psycopg2==2.9.3
 uWSGI==2.0.20
 
 django-crispy-forms==2.1
-crispy-bootstrap3==2022.1
+crispy-bootstrap4==2023.1

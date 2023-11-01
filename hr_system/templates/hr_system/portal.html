@@ -1,0 +1,56 @@
+{% extends "hr_system/barebone.html" %}
+{% block content %}
+  <!--Portal-->
+  <div class="container py-5">
+    <div id="portal-user-info">
+      <h3>User Information</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>{{ user_data.first_name }}</th>
+            <th>{{ user_data.last_name }}</th>
+            <th>{{ user_data.email }}</th>
+            <th>{{ user_data.phone_number }}</th>
+            <th>{{ user_data.address }}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="portal-employee-info">
+      <h3>Employee Information</h3>
+      {% if employee_data %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Employee ID</th>
+              <th>Hiring Date</th>
+              <th>Service Status</th>
+              <th>Department</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>{{ employee_data.id }}</th>
+              <th>{{ employee_data.date_of_hire }}</th>
+              <th>{{ service_status }}</th>
+              <th>{{ department_data.title }}</th>
+              <th>{{ role_data.title }}</th>
+            </tr>
+          </tbody>
+        </table>
+      {% else %}
+        <p class="text-danger">You are currently not an employee! Please wait for the administrators to configure your account.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}

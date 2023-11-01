@@ -1,0 +1,16 @@
+{% extends "hr_system/barebone.html" %}
+{% block content %}
+  {% load crispy_forms_tags %}
+  <!--Register-->
+  <div id="portal-register" class="container mb-5 py-3 px-4 w-50 shadow rounded">
+    <h1>Register</h1>
+    <p class="fw-lighter text-secondary">
+      Already have an account? <a href={% url "portal_login" %}>Login</a> instead!
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      {{ register_form|crispy }}
+      <button class="btn btn-primary custom-submit-btn" type="submit">Register</button>
+    </form>
+  </div>
+{% endblock content %}

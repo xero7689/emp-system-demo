@@ -38,6 +38,8 @@ class RegisterViewTest(TestCase):
             'email': 'testuser2@example.com',
             'password1': 'testpassword',
             'password2': 'testpassword',
+            'first_name': 'test',
+            'last_name': 'user',
             'phone_number': '1234567890',
             'address': 'Test Address'
         }
@@ -56,6 +58,8 @@ class RegisterViewTest(TestCase):
             'email': 'testuser2@example.com',
             'password1': 'testpassword',
             'password2': 'testpassword',
+            'first_name': 'test',
+            'last_name': 'user',
             'phone_number': '1234567890',
             'address2': 'Test Address',
         }

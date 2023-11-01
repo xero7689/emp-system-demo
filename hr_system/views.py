@@ -63,9 +63,12 @@ class LoginView(View):
                 login(request, user)
                 messages.info(request, f"You're now logged in as {username}.")
                 return HttpResponseRedirect(reverse("portal_index"))
-        messages.error(request, "Invalid username or password")
 
-        return render(request, template_name="hr_system/login.html", context={"login_form": form})
+        messages.error(request, "Invalid username or password")
+        response = render(
+            request, template_name="hr_system/login.html", context={"login_form": form})
+        response.status_code = 401
+        return response
 
 
 class RegisterView(View):

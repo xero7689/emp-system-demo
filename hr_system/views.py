@@ -30,7 +30,8 @@ class PortalView(TemplateView):
             'department').select_related('role').filter(user=user).first()
 
         if employee:
-            service_status = Employee.ServiceStatus(employee.service_status).name
+            service_status = Employee.ServiceStatus(
+                employee.service_status).name
             department_data = Department.objects.get(pk=employee.department_id)
             role_data = Role.objects.get(pk=employee.role_id)
 
@@ -81,10 +82,14 @@ class RegisterView(View):
             user = form.save()
             login(request, user)
             return HttpResponseRedirect(reverse('portal_index'))
-        messages.error(
-            request, "Unsuccessful registration. Invalid information.")
+        else:
+            messages.error(
+                request, "Unsuccessful registration. Invalid information.")
 
-        return render(request, template_name="hr_system/register.html", context={"register_form": form})
+            response = render(
+                request, template_name="hr_system/register.html", context={"register_form": form})
+            response.status_code = 422
+            return response
 
 
 class LogoutView(View):
